@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,7 +22,13 @@ public class Empregador {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome;	
+	@NotBlank(message = "Nome é obrigatório")
+	@Size(max = 150)
+	@NotNull
+	private String nome;
+	@Size(max = 18)
+	@NotNull
+	@NotBlank(message = "Identificador é obrigatório")
 	private String identificador;
 	
 	@OneToMany 

@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,10 +24,16 @@ public class Colaborador {
 	private Integer id;
 	
 	@Column(name = "nome")
+	@Size(min = 1, max = 50)
+	@NotNull
+	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 	
+	@NotBlank(message = "Sobrenome é obrigatório")
+	@Size(min = 1, max = 50)
 	private String sobrenome;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_empregador",referencedColumnName = "id")
 	@JsonIgnoreProperties("colaboradores")
